@@ -24,7 +24,7 @@ $("form").on("submit", async function(evt) {
   $searchInput.val("");
 
   try {
-    const response = await axios.get("http://api.giphy.com/v1/gifs/search", {
+    const response = await axios.get("https://api.giphy.com/v1/gifs/search", {
       params: {
         q: searchTerm,
         api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym"
