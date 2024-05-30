@@ -2,7 +2,6 @@ const $gifArea = $("#gif-area");
 const $searchInput = $("#search");
 
 /* use ajax result to add a gif */
-
 function addGif(res) {
   let numResults = res.data.length;
   if (numResults) {
@@ -18,24 +17,26 @@ function addGif(res) {
 }
 
 /* handle form submission: clear search box & make ajax call */
-
 $("form").on("submit", async function(evt) {
   evt.preventDefault();
 
   let searchTerm = $searchInput.val();
   $searchInput.val("");
 
-  const response = await axios.get("http://api.giphy.com/v1/gifs/search", {
-    params: {
-      q: searchTerm,
-      api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym"
-    }
-  });
-  addGif(response.data);
+  try {
+    const response = await axios.get("https://api.giphy.com/v1/gifs/search", {
+      params: {
+        q: searchTerm,
+        api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym"
+      }
+    });
+    addGif(response.data);
+  } catch (e) {
+    alert("Error fetching GIFs. Please try again later.");
+  }
 });
 
 /* remove gif */
-
 $("#remove").on("click", function() {
   $gifArea.empty();
 });
